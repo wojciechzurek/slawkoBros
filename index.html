@@ -54,46 +54,9 @@
 			var keysPressed = [];
 			var keyHold = false;
 			
-			var playerImage = new Image();
-			playerImage.src = "images/37_slawo.png";
-			
-			var player = new Player(BLOCK_SIZE*2, HEIGHT-BLOCK_SIZE*3, BLOCK_SIZE, BLOCK_SIZE, playerImage);
+			var player = null;
 
-			var monsterImage = new Image();
-			monsterImage.src = "images/monster.png";
-
-			var monsterDeadImage = new Image();
-			monsterDeadImage.src = "images/monsterDead.png";
-
-			var floorUpBlock = new Image();
-			floorUpBlock.src = "images/floorUp.png";
-
-			var floorDownBlock = new Image();
-			floorDownBlock.src = "images/floorDown.png";
-
-			var coinBlock = new Image();
-			coinBlock.src = "images/coinBlock.png";
-
-			var gameBg = new Image();
-			gameBg.src = "images/gameBg.png";
-
-			var gameBgStop = new Image();
-			gameBgStop.src = "images/gameBgStop.png";
-
-			var gameBgDead = new Image();
-			gameBgDead.src = "images/gameBgDead.png";
-
-			var pikoImage = new Image();
-			pikoImage.src = "images/piko.png";
-			
-			var disabledImage = new Image();
-			disabledImage.src = "images/4.png";
-			
-			var komnataMainEntranceImage = new Image();
-			komnataMainEntranceImage.src = "images/komnata.png";
-			
-			var workInProgressImage = new Image();
-			workInProgressImage.src = "images/praceTrwaja.png";
+			var images = [];
 			
 			var slawkoImages = [];
 			var slawkoPlayerImages = [];
@@ -102,7 +65,6 @@
 			var slawkoPlayersHeight = [47, 55, 47, 54, 54, 50, 53, 54, 57, 51];
 			var selectedSlawko = -1;
 			
-			//var map =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2];
 			var map =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2];
 			var blocks = [];
 			var map_scrolled = 0;
@@ -111,14 +73,33 @@
 			var specialItemsArray = [];
 			
 			var monsters = [];
+
+			var SCREEN_TYPE = 1;
 			
-			/*
-			1 -> Gra
-			2 -> Wybor slawka
-			3 -> zginales
-			4 -> stop menu
-			*/
-			SCREEN_TYPE = 1;
+			function loadImages()
+			{
+				var imageNames = [
+								["player",				"37_slawo.png"],
+								["monster",				"monster.png"],
+								["monsterDead",			"monsterDead.png"],
+								["floorUpBlock",		"floorUp.png"],
+								["floorDownBlock",		"floorDown.png"],
+								["coinBlock",			"coinBlock.png"],
+								["gameBg",				"gameBg.png"],
+								["gameBgStop",			"gameBgStop.png"],
+								["gameBgDead",			"gameBgDead.png"],
+								["piko",				"piko.png"],
+								["disabledBlock",		"4.png"],
+								["komnataMainEntrance",	"komnata.png"],
+								["workInProgress",		"praceTrwaja.png"]
+							];
+				
+				for (var i = 0; i < imageNames.length; i++)
+				{
+					images[imageNames[i][0]] = new Image();
+					images[imageNames[i][0]].src = "images/"+imageNames[i][1];
+				}
+			}
 
 			function loadBlocks()
 			{
@@ -127,64 +108,61 @@
 				for (var i = 0, a = 0; i < map.length; i++, a++)
 				{
 					var isBlock = true,
-						isXY = false,
 						imgSrc = null,
 						_w = BLOCK_SIZE,
 						_h = BLOCK_SIZE,
 						_x = 0,
 						_y = 0;
 
-					if (map[i] == 1)
-						imgSrc = floorUpBlock;
-					else if (map[i] == 2)
-						imgSrc = floorDownBlock;
-					else if (map[i] == 3)
-						imgSrc = coinBlock;
-					else if (map[i] == 4)
+					switch(map[i])
 					{
-						isBlock = false;
-						imgSrc = monsterImage;
-						_w = 89;
-						_h = 73;
-					}
-					else if (map[i] == 5)	// komnata grubego
-					{
-						isXY = true;
-						_w = 256;
-						_h = 160;
-						_x = -30;
-						_y = -100;
-						
-						imgSrc = komnataMainEntranceImage;
-					}
-					else if (map[i] == 6)	// prace trwaja
-					{
-						isXY = true;
-						_w = 178;
-						_h = 140;
-						_x = -150;
-						_y = -98;
-						
-						imgSrc = workInProgressImage;
+						case 1:
+							imgSrc = images["floorUpBlock"];
+							break;
+						case 2:
+							imgSrc = images["floorDownBlock"];
+							break;
+						case 3:
+							imgSrc = images["coinBlock"];
+							break;
+						case 4:
+							isBlock = false;
+							imgSrc = images["monster"];
+							_w = 89;
+							_h = 73;
+							break;
+						case 5:
+							_w = 256;
+							_h = 160;
+							_x = -30;
+							_y = -100;
+							
+							imgSrc = images["komnataMainEntrance"];
+							break;
+						case 6:
+							_w = 178;
+							_h = 140;
+							_x = -150;
+							_y = -98;
+							
+							imgSrc = images["workInProgress"];
+							break;
+						default:
+							imgSrc = null;
 					}
 					
-					if (imgSrc != null && isXY && isBlock)
+					if (imgSrc != null)
 					{
-						var block = new Block((a-1)*BLOCK_SIZE+_x, y*BLOCK_SIZE+_y, _w, _h, map[i], imgSrc);
-						blocks.push(block);
-					}
-					else if (imgSrc != null && isBlock)
-					{
-						var block = new Block((a-1)*BLOCK_SIZE, y*BLOCK_SIZE, _w, _h, map[i], imgSrc);
-						blocks.push(block);
-					}
-					else if (imgSrc != null)
-					{
-						//if (monsters.length == 0)
-						//{
+						if (isBlock)
+						{
+							var block = new Block((a-1)*BLOCK_SIZE+_x, y*BLOCK_SIZE+_y, _w, _h, map[i], imgSrc);
+							blocks.push(block);
+						}
+						else
+						{
 							var monster = new Monster((a-1)*BLOCK_SIZE-_w+BLOCK_SIZE, y*BLOCK_SIZE-_h+BLOCK_SIZE, _w, _h, map[i], imgSrc);
 							monsters.push(monster);
-						//}
+						}
 					}
 						
 					if (a == MAP_WIDTH)
@@ -201,37 +179,14 @@
 				{
 					var slawkoImage = new Image();
 					slawkoImage.src = "images/slaw/"+slawkoImageNames[i]+".jpg";
-
 					slawkoImages.push(slawkoImage);
+					
+					var slawkoPlayerImage = new Image();
+					slawkoPlayerImage.src = "images/slawCircle/"+slawkoImageNames[i]+".png";
+					slawkoPlayerImages.push(slawkoPlayerImage);
 				}
 			}
-			
-			function loadSlawkoPlayerImages()
-			{
-				for (var i = 0; i < slawkoImageNames.length; i++)
-				{
-					var slawkoImage = new Image();
-					slawkoImage.src = "images/slawCircle/"+slawkoImageNames[i]+".png";
 
-					slawkoPlayerImages.push(slawkoImage);
-				}
-			}
-			/*
-			function distance(x1, x2)
-			{
-				return Math.abs(x1-x2);
-			}
-
-			function isInX(x1, w1, x2)
-			{
-				return (x2 >= x1 && x2 <= x1+w1);
-			}
-			
-			function isUpOnY(y1, h1, y2)
-			{
-				return ();
-			}
-			*/
 			function drawMap()
 			{
 				var haveFloor = false;
@@ -252,11 +207,9 @@
 						continue;
 					if (!player.jumping && !haveFloor)
 					{
-						//console.log("player coll: "+(player.x+player.width+1 >= block.x)+" | "+(player.x < block.x+block.width)+" | "+(player.y >= block.y-player.height));
 						if (player.x+player.width+1 >= block.x && player.x < block.x+block.width &&
 							player.y == block.y-player.height)
 						{
-							//console.log("y: "+player.y+" y: "+block.y+" : -"+(block.y-player.height));
 							haveFloor = true;
 						}
 					}
@@ -273,12 +226,11 @@
 						}
 
 						monster.draw(ctx);
-						//console.log((player.x+player.width+1 >= monster.x) + " | " + (player.x < monster.x+monster.width) + " | " + (player.y >= monster.y-player.height));
+						
 						// jezeli gracz jest na martwym potworze to moze po nim chodzic
 						if (player.x+player.width+1 >= monster.x && player.x < monster.x+monster.width &&
 							player.y == monster.y-player.height && !haveFloor)
 						{
-							//console.log("console.log HAVE FLOOR");
 							haveFloor = true;
 						}
 					}
@@ -306,7 +258,6 @@
 					}
 				}
 				map_scrolled += x;
-				//console.log(map_scrolled);
 			}
 			
 			function processBlockAnimation()
@@ -318,9 +269,9 @@
 					if (block.animY == 1 && block.blockID == 3)
 					{
 						console.log("start piko");
-						var piko = new SpecialItem(block.x, block.y, 32, 32, 1, pikoImage);
+						var piko = new SpecialItem(block.x, block.y, 32, 32, 1, images["piko"]);
 						specialItemsArray.push(piko);
-						block.imgSrc = disabledImage;
+						block.imgSrc = images["disabledBlock"];
 						block.blockID = 4;
 					}
 					
@@ -380,114 +331,109 @@
 				}
 			}
 			
-			function drawGame()
+			function checkKeysPressed()
 			{
-				if (SCREEN_TYPE == 1)
+				if (keysPressed[38] || keysPressed[32])
 				{
-					if (keysPressed[38] || keysPressed[32])
+					if(!player.jumping && player.canJump)
 					{
-						if(!player.jumping && player.canJump)
-						{
-							player.jumping = true;
-							player.newY = -(player.maxSpeed+0.8)*2;
-						}
+						player.jumping = true;
+						player.newY = -(player.maxSpeed+0.8)*2;
 					}
+				}
 
-					if (keysPressed[39])
+				if (keysPressed[39])
+				{
+					if (player.newX < player.maxSpeed)
 					{
-						if (player.newX < player.maxSpeed)
-						{
-							player.newX++;
-						}
-					}						
-					else if (keysPressed[37])
-					{
-						if (player.newX > -player.maxSpeed)
-						{
-							player.newX--;
-						}
+						player.newX++;
 					}
+				}						
+				else if (keysPressed[37])
+				{
+					if (player.newX > -player.maxSpeed)
+					{
+						player.newX--;
+					}
+				}
+				else
+					player.newX = 0;
+			}
+			
+			function movePlayer()
+			{
+				if (player.jumping || !player.haveFloor)
+					player.newY += 0.3;
+				
+				if (player.newX != 0)
+				{
+					player.newX *= 0.8;
+					if (player.x+player.newX > WIDTH/2 && map_scrolled < BLOCK_SIZE*74)
+						scrollMap("right", player.newX);
 					else
-						player.newX = 0;
+						player.x += player.newX;
+				}
 
-					if (player.jumping || !player.haveFloor)
+				if (player.newY != 0)
+					player.y += player.newY;
+
+				if (player.x <= 0)
+					player.x = 0;
+				if (player.x >= WIDTH-player.width)
+					player.x = WIDTH-player.width;
+				
+				// sprawdzam czy gracz uderzyl w blok
+				for (var i = 0; i < blocks.length; i++)
+				{
+					if (blocks[i].blockID == 5 || blocks[i].blockID == 6)
+						continue;
+					var collision = player.isCollideWithBlock(blocks[i]);
+
+					if (collision == "bottom")
 					{
-						player.newY += 0.3;
-						//console.log(player.newY);
+						if (player.newY < 0 && animations.indexOf(i) == -1)
+							animations.push(i);
+
+						if (player.jumping)
+						{
+							player.y -= player.newY;
+							player.y += 3;
+							player.newY = 0;
+						}
 					}
-					
-					if (player.newX != 0)
+					else if (collision == "right")
+							player.x -= player.newX;
+					else if (collision == "left")
+							player.x -= player.newX;
+					else if (collision == "top")
 					{
-						player.newX *= 0.8;
-						if (player.x+player.newX > WIDTH/2 && map_scrolled < BLOCK_SIZE*74)
-							scrollMap("right", player.newX);
-						else
-							player.x += player.newX;
+						player.y = blocks[i].y-player.height;
+						player.newY = 0;
+						if (player.jumping)
+						{
+							player.jumping = false;
+							player.canJump = false;
+						}
 					}
-
-					if (player.newY != 0)
-						player.y += player.newY;
-
-					if (player.x <= 0)
-						player.x = 0;
-					if (player.x >= WIDTH-player.width)
-						player.x = WIDTH-player.width;
-
-					for (var i = 0; i < monsters.length; i++)
+				}
+				
+				// sprawdzam czy gracz uderzyl w potwora
+				for (var i = 0; i < monsters.length; i++)
+				{
+					var collision = player.isCollideWithBlock(monsters[i]);
+					if (collision == "top")
 					{
 						var monster = monsters[i];
-						if (monster.isDead ||
-							monster.x < -monster.width || monster.x > WIDTH)
-							continue;
-						if (monster.moveingLeft && monster.newX > -monster.maxSpeed)
-							monster.newX--;
-						else if (monster.newX < monster.maxSpeed)
-							monster.newX++;
-						
-						if (!monster.haveFloor)
-							monster.moveingLeft = !monster.moveingLeft;
+						if (monster.monsterID == 4 && !monster.isDead)
+						{
+							monster.imgSrc = images["monsterDead"];
+							monster.y += monster.height-32;
+							monster.height = 32;
+							monster.isDead = true;
+						}
 						else
-							monster.x += monster.newX;
-					}
-
-					for (var i = 0; i < blocks.length; i++)
-					{
-						if (blocks[i].blockID == 5 || blocks[i].blockID == 6)
-							continue;
-						var collision = player.isCollideWithBlock(blocks[i]);
-						//if (collision != "none")
-						//	console.log(collision+" + "+player.jumping);
-						
-						if (collision == "bottom")
 						{
-							//console.log("y: "+player.newY);
-							if (player.newY < 0 && animations.indexOf(i) == -1)
-								animations.push(i);
-
-							if (player.jumping)
-							{
-								player.y -= player.newY;
-								player.y += 3;
-								player.newY = 0;
-							}
-						}
-						else if (collision == "right")
-						{
-							//if (player.jumping)
-							//{
-								player.x -= player.newX;
-							//}
-						}
-						else if (collision == "left")
-						{
-							//if (player.jumping)
-							//{
-								player.x -= player.newX;
-							//}
-						}
-						else if (collision == "top")
-						{
-							player.y = blocks[i].y-player.height;
+							player.y = monster.y-player.height;
 							player.newY = 0;
 							if (player.jumping)
 							{
@@ -495,105 +441,111 @@
 								player.canJump = false;
 							}
 						}
-						
-						for (var j = 0; j < monsters.length; j++)
+					}
+					else if (collision != "none")
+					{
+						if (!monsters[i].isDead)
+							SCREEN_TYPE = 3;
+						else
 						{
-							var monster = monsters[j];
-							if (monster.isDead ||
-								monster.x < -monster.width || monster.x > WIDTH)
-								continue;
-							var collision = monster.isCollideWithBlock(blocks[i]);
-							//if (collision != "none")
-							//	console.log(collision + " | " + monster.haveFloor);
-							
-							if (collision == "right")
-								monster.moveingLeft = false;
+							if (collision == "bottom")
+							{
+								player.y -= player.newY;
+							}
+							else if (collision == "right")
+							{
+								player.x -= player.newX;
+							}
 							else if (collision == "left")
-								monster.moveingLeft = true;
+							{
+								player.x -= player.newX;
+							}
 						}
 					}
+				}
 
-					for (var i = 0; i < specialItemsArray.length; i++)
+				// sprawdzam czy gracz zdobyl specjalny przedmiot
+				for (var i = 0; i < specialItemsArray.length; i++)
+				{
+					var collision = player.isCollideWithBlock(specialItemsArray[i]);
+					if (collision != "none")
 					{
-						var collision = player.isCollideWithBlock(specialItemsArray[i]);
-						if (collision != "none")
+						var item = specialItemsArray[i];
+						if (item.blockID == 1)		// piko
 						{
-							var item = specialItemsArray[i];
-							if (item.blockID == 1)		// piko
-							{
-								SCREEN_TYPE = 2;
-								specialItemsArray.splice(i, 1);
-							}
+							SCREEN_TYPE = 2;
+							specialItemsArray.splice(i, 1);
 						}
 					}
+				}
+				
+				// sprawdzam czy gracz wpadl w dol
+				if (player.y > HEIGHT)
+					SCREEN_TYPE = 3;
+			}
+			
+			function moveMonsters()
+			{
+				// ruszam wszystkimi potworami
+				for (var i = 0; i < monsters.length; i++)
+				{
+					var monster = monsters[i];
+					if (monster.isDead ||
+						monster.x < -monster.width || monster.x > WIDTH)
+						continue;
+					if (monster.moveingLeft && monster.newX > -monster.maxSpeed)
+						monster.newX--;
+					else if (monster.newX < monster.maxSpeed)
+						monster.newX++;
+					
+					if (!monster.haveFloor)
+						monster.moveingLeft = !monster.moveingLeft;
+					else
+						monster.x += monster.newX;
+				}
+				
+				// sprawdzam czy potwor dotknal bloku
+				for (var i = 0; i < blocks.length; i++)
+				{
+					if (blocks[i].blockID == 5 || blocks[i].blockID == 6)
+						continue;
 
-					for (var i = 0; i < monsters.length; i++)
+					for (var j = 0; j < monsters.length; j++)
 					{
-						var collision = player.isCollideWithBlock(monsters[i]);
-						//console.log(collision);
-						if (collision == "top")
-						{
-							var monster = monsters[i];
-							if (monster.monsterID == 4 && !monster.isDead)		// piko
-							{
-								monster.imgSrc = monsterDeadImage;
-								monster.y += monster.height-32;
-								monster.height = 32;
-								monster.isDead = true;
-								//monsters.splice(i, 1);
-							}
-							else
-							{
-								player.y = monster.y-player.height;
-								player.newY = 0;
-								if (player.jumping)
-								{
-									player.jumping = false;
-									player.canJump = false;
-								}
-							}
-						}
-						else if (collision != "none")
-						{
-							if (!monsters[i].isDead)
-								SCREEN_TYPE = 3;
-							else
-							{
-								if (collision == "bottom")
-								{
-									player.y -= player.newY;
-								}
-								else if (collision == "right")
-								{
-									player.x -= player.newX;
-								}
-								else if (collision == "left")
-								{
-									player.x -= player.newX;
-								}
-							}
-						}
+						var monster = monsters[j];
+						if (monster.isDead ||
+							monster.x < -monster.width || monster.x > WIDTH)
+							continue;
+						var collision = monster.isCollideWithBlock(blocks[i]);
+
+						if (collision == "right")
+							monster.moveingLeft = false;
+						else if (collision == "left")
+							monster.moveingLeft = true;
 					}
+				}
+			}
+			
+			function drawGame()
+			{
+				if (SCREEN_TYPE == 1)
+				{
+					checkKeysPressed();
+					moveMonsters();
+					movePlayer();
 
 					ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-					ctx.drawImage(gameBg, 0, 0);
+					ctx.drawImage(images["gameBg"], 0, 0);
 					
 					processSpecialItems();
-					
 					drawMap();
-					
 					processBlockAnimation();
-					
 					player.draw(ctx);
-					
-					if (player.y > HEIGHT)
-						SCREEN_TYPE = 3;
 				}
 				else
 				{
 					ctx.clearRect(0, 0, WIDTH, HEIGHT);
-					ctx.drawImage(gameBg, 0, 0);
+					ctx.drawImage(images["gameBg"], 0, 0);
 					processSpecialItems();
 					drawMap();
 					player.draw(ctx);
@@ -604,11 +556,11 @@
 			{
 				if (SCREEN_TYPE == 2)
 				{
-					//ctx.clearRect(0, 0, WIDTH, HEIGHT);
 					var last = selectedSlawko;
 					if (last == -1)
 						selectedSlawko = 0;
-					if (keysPressed[13])	// enter
+
+					if (keysPressed[13])		// enter
 					{
 						keysPressed[13] = false;
 						SCREEN_TYPE = 1;
@@ -629,7 +581,7 @@
 						else
 							selectedSlawko--;
 					}
-					ctx.drawImage(gameBgStop, 0, 0);
+					ctx.drawImage(images["gameBgStop"], 0, 0);
 					
 					ctx.drawImage(slawkoImages[selectedSlawko], WIDTH/2-107, HEIGHT/2-176);
 					
@@ -662,15 +614,13 @@
 			{
 				if (SCREEN_TYPE == 3)
 				{
-					//ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
 					if (keysPressed[13])	// enter
 					{
 						keysPressed[13] = false;
 						startGame(true);
 						SCREEN_TYPE = 1;
 					}
-					ctx.drawImage(gameBgDead, 0, 0);
+					ctx.drawImage(images["gameBgDead"], 0, 0);
 					
 					ctx.font = "60px Arial";
 					ctx.lineWidth = 1;
@@ -686,20 +636,18 @@
 			
 			function update()
 			{
-				if (SCREEN_TYPE == 1)		// game
+				if (SCREEN_TYPE == 1)
 				{
 					drawGame();
 				}
-				else if (SCREEN_TYPE == 2)	// select slawko
+				else if (SCREEN_TYPE == 2)
 				{
 					drawGame();
-					//ctx.clearRect(0, 0, WIDTH, HEIGHT);
 					drawSlawkoSelectScreen();
 				}
-				else if (SCREEN_TYPE == 3)	// dead
+				else if (SCREEN_TYPE == 3)
 				{
 					drawGame();
-					//ctx.clearRect(0, 0, WIDTH, HEIGHT);
 					drawDeadScreen();
 				}
 				
@@ -713,21 +661,19 @@
 				animations = [];
 				specialItemsArray = [];
 
+				player = new Player(BLOCK_SIZE*2, HEIGHT-BLOCK_SIZE*3, BLOCK_SIZE, BLOCK_SIZE, images["player"])
 				player.x = BLOCK_SIZE*2;
 				player.y = HEIGHT-BLOCK_SIZE*3;
 				player.width = BLOCK_SIZE;
 				player.height = BLOCK_SIZE;
-				player.imgSrc = playerImage;
+				player.imgSrc = images["player"];
 				
 				selectedSlawko = -1;
 				map_scrolled = 0;
 
 				loadBlocks();
 				if (!restart)
-				{
 					loadSlawkoImages();
-					loadSlawkoPlayerImages();
-				}
 			}
 
 			document.body.addEventListener("keydown", 
@@ -752,8 +698,8 @@
 			window.addEventListener("load",
 				function()
 				{
+					loadImages();
 					startGame();
-
 					update();
 				}
 			);
