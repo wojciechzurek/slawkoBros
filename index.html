@@ -356,8 +356,6 @@
 						player.newX--;
 					}
 				}
-				else
-					player.newX = 0;
 			}
 			
 			function movePlayer()
@@ -365,9 +363,9 @@
 				if (player.jumping || !player.haveFloor)
 					player.newY += 0.3;
 				
+				player.newX *= 0.9;
 				if (player.newX != 0)
 				{
-					player.newX *= 0.8;
 					if (player.x+player.newX > WIDTH/2 && map_scrolled < BLOCK_SIZE*74)
 						scrollMap("right", player.newX);
 					else
